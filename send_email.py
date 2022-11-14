@@ -9,7 +9,7 @@ password = config.password
 def send_email(image_path):
     email_message = EmailMessage()
     email_message['Subject'] = 'New object detected'
-    email_message.set_content('Something enter the roo. Check the image attached')
+    email_message.set_content('Something enter the room. Check the image attached')
 
     with open(image_path, 'rb') as file:
         content = file.read()

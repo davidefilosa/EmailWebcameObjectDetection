@@ -2,6 +2,7 @@ import cv2
 import time
 from send_email import send_email
 import glob
+import os
 
 video = cv2.VideoCapture(0)
 time.sleep(1)
@@ -9,6 +10,14 @@ time.sleep(1)
 first_frame = None
 status_list = []
 count = 1
+
+def clean_folder():
+    images = glob.glob('images/*.png')
+    for image in images:
+        os.remove(image)
+
+
+
 while True:
     status = 0
     check, frame = video.read()
@@ -39,6 +48,7 @@ while True:
     status_list = status_list[-2:]
     if status_list[0] == 1 and status_list[1] == 0:
         send_email(image_with_object)
+        clean_folder()
 
     cv2.imshow('My Video', frame)
 
